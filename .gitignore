@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.vscode/
+outputs/
+work/*.log
+work/logo_preview_dark.png
+*.pyc

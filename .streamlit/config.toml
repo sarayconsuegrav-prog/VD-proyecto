@@ -1,0 +1,10 @@
+[theme]
+base = "dark"
+primaryColor = "#2f7dd9"
+backgroundColor = "#03070c"
+secondaryBackgroundColor = "#0a1320"
+textColor = "#f7fbff"
+font = "sans serif"
+
+[server]
+fileWatcherType = "none"
