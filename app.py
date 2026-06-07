@@ -1453,8 +1453,6 @@ def render_sector_treemap(df: pd.DataFrame) -> None:
         return
 
     chart_df = chart_df.sort_values("registros", ascending=False).reset_index(drop=True)
-    chart_df["porcentaje"] = chart_df["registros"] / chart_df["registros"].sum()
-    chart_df["porcentaje_label"] = chart_df["porcentaje"].apply(lambda value: f"{value:.0%}")
     marine_scale = ["#0b4f6c", "#11698b", "#1f95b7", "#41bed7", "#88dde8", "#c8f4f7"]
     color_map = {
         row["sector"]: marine_scale[min(index, len(marine_scale) - 1)]
@@ -1469,10 +1467,9 @@ def render_sector_treemap(df: pd.DataFrame) -> None:
         title="Sectores biológicos de la muestra",
     )
     fig.update_traces(
-        texttemplate="<b>%{label}</b><br>%{customdata[0]}",
-        customdata=chart_df[["porcentaje_label"]],
+        texttemplate="<b>%{label}</b><br>%{percentRoot:.0%}",
         marker={"line": {"color": "#07111d", "width": 2}},
-        hovertemplate="<b>%{label}</b><br>Participación: %{customdata[0]}<br>Registros: %{value:,}<extra></extra>",
+        hovertemplate="<b>%{label}</b><br>Participación: %{percentRoot:.1%}<br>Registros: %{value:,}<extra></extra>",
     )
     fig.update_layout(showlegend=False, coloraxis_showscale=False)
     fig = style_plotly(fig, height=350)
